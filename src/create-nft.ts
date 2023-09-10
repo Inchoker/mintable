@@ -23,7 +23,8 @@ export const handler: APIGatewayProxyHandler = async (event) => {
             name:requestBody.name,
             desc: requestBody.desc,
             img:requestBody.img,
-            uuid: uuidv4()
+            uuid: uuidv4(),
+            partition:1
         }
 
         const command = new PutCommand({
