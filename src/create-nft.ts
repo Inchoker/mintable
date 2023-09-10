@@ -1,16 +1,36 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
+import * as AWS from 'aws-sdk';
+import {DocumentClient} from "aws-sdk/lib/dynamodb/document_client";
 
-export const handler: APIGatewayProxyHandler = async (event) => {
+AWS.config.update({ region: 'your-aws-region' });
+const dynamoDB = new AWS.DynamoDB.DocumentClient();
+
+export const saveToDynamoDB: APIGatewayProxyHandler = async (event) => {
     try {
-        const response = {
-            statusCode: 200,
-            body: JSON.stringify({ message: 'Hello, World!' }),
+        if(!event.body){
+            throw new Error()
+        }
+        const requestBody = JSON.parse(event.body);
+
+        const params: DocumentClient.PutItemInput = {
+            TableName: 'nft',
+            Item: {
+                id: requestBody.id,
+                name: requestBody.name,
+                // Add more attributes as needed
+            },
         };
-        return response;
+
+        await dynamoDB.put(params).promise();
+
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ message: 'Data saved to DynamoDB successfully' }),
+        };
     } catch (error) {
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'Internal Server Error' }),
+            body: JSON.stringify({ error: 'An error occurred while saving to DynamoDB' }),
         };
     }
 };
