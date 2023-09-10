@@ -25,7 +25,7 @@ jobs:
         run: npm run build
 
       - name: Change file name
-        run: mv ./dist/create-nft.js ./dist/index.mjs
+        run: mv ./dist/create-nft.js ./index.mjs
 
       - name: Create create-nft Package
         run: |
