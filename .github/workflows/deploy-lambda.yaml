@@ -24,6 +24,14 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Deploy to AWS Lambda
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: us-east-1
+
+      #deploy create nft
       - name: Change file name
         run: mv ./dist/create-nft.js ./index.mjs
 
@@ -31,12 +39,23 @@ jobs:
         run: |
           zip -r create-nft-package.zip ./index.mjs ./node_modules -x "node_modules/.bin/*" "node_modules/.cache/*"
 
-      - name: Deploy to AWS Lambda
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
       - name: Upload Deployment Package
         run: aws lambda update-function-code --function-name create-nft --zip-file fileb://create-nft-package.zip
+
+      - name: Remove index.mjs
+        run: rm ./index.mjs
+
+      #deploy get jwt token
+      - name: Change file name
+        run: mv ./dist/get-jwt.js ./index.mjs
+
+      - name: Create create-nft Package
+        run: |
+          zip -r get-jwt-package.zip ./index.mjs ./node_modules -x "node_modules/.bin/*" "node_modules/.cache/*"
+
+      - name: Upload Deployment Package
+        run: aws lambda update-function-code --function-name get-jwt --zip-file fileb://get-jwt-package.zip
+
+      - name: Remove index.mjs
+        run: rm ./index.mjs
+
