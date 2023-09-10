@@ -45,4 +45,18 @@ jobs:
       - name: Remove index.mjs
         run: rm ./index.mjs
 
+      #deploy get nft
+      - name: Change file name
+        run: mv ./dist/get-nft.js ./index.mjs
+
+      - name: Create get-nft Package
+        run: |
+          zip -r get-nft-package.zip ./index.mjs ./node_modules -x "node_modules/.bin/*" "node_modules/.cache/*"
+
+      - name: Upload Deployment Package
+        run: aws lambda update-function-code --function-name get-nft --zip-file fileb://get-nft-package.zip
+
+      - name: Remove index.mjs
+        run: rm ./index.mjs
+
 
