@@ -6,6 +6,7 @@ const client = new DynamoDBClient({} as any);
 const docClient = DynamoDBDocumentClient.from(client);
 
 export const handler: APIGatewayProxyHandler = async (event) => {
+    console.log(event)
     if(!event.body){
         return {
             statusCode: 200,
