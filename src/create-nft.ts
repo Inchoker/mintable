@@ -17,7 +17,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     console.log(docClient)
     try {
         if(!event.body){
-            throw new Error()
+            throw new Error('No body in request')
         }
         const requestBody = JSON.parse(event.body);
         const item: NFTType ={
@@ -40,7 +40,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     } catch (error) {
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'An error occurred while saving to DynamoDB' }),
+            body: JSON.stringify({ error: 'An error occurred while saving to DynamoDB',error }),
         };
     }
 };
