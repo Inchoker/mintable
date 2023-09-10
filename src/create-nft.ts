@@ -1,14 +1,16 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
-import * as AWS from 'aws-sdk';
-import {DocumentClient} from "aws-sdk/lib/dynamodb/document_client";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { PutCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
-AWS.config.update({ region: 'us-east-1' });
-const dynamoDB = new AWS.DynamoDB.DocumentClient();
 type NFTType = {
     name:string;
     desc:string;
     img:string;
 }
+
+const client = new DynamoDBClient({} as any);
+const docClient = DynamoDBDocumentClient.from(client);
+
 
 export const handler: APIGatewayProxyHandler = async (event) => {
     console.log(event)
@@ -23,12 +25,12 @@ export const handler: APIGatewayProxyHandler = async (event) => {
             img:requestBody.img,
         }
 
-        const params: DocumentClient.PutItemInput = {
-            TableName: 'nft',
+        const command = new PutCommand({
+            TableName: "nft",
             Item: item,
-        };
-
-        await dynamoDB.put(params).promise();
+        });
+        const response = await docClient.send(command);
+        console.log(response);
 
         return {
             statusCode: 200,
