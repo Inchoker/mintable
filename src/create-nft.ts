@@ -37,10 +37,10 @@ export const handler: APIGatewayProxyHandler = async (event) => {
             statusCode: 200,
             body: JSON.stringify({ message: 'Data saved to DynamoDB successfully' }),
         };
-    } catch (error) {
+    } catch (e) {
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'An error occurred while saving to DynamoDB',error }),
+            body: JSON.stringify({ error: 'An error occurred while saving to DynamoDB',e }),
         };
     }
 };
