@@ -17,7 +17,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     const command = new GetCommand({
         TableName: "nft",
         Key: {
-            name: requestBody.name
+            name: {S:requestBody.name}
         }
     });
 
