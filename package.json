@@ -11,10 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/aws-lambda": "^8.10.119"
+    "@types/aws-lambda": "^8.10.119",
+    "aws-sdk": "^2.1454.0"
   },
   "devDependencies": {
-    "aws-sdk": "^2.1454.0",
     "typescript": "^5.2.2"
   }
 }
