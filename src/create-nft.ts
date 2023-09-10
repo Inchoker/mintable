@@ -2,7 +2,6 @@ import { APIGatewayProxyHandler } from 'aws-lambda';
 import * as AWS from 'aws-sdk';
 import {DocumentClient} from "aws-sdk/lib/dynamodb/document_client";
 
-AWS.config.update({ region: 'your-aws-region' });
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 type NFTType = {
     name:string;
