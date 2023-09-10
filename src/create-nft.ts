@@ -2,15 +2,15 @@ import { APIGatewayProxyHandler } from 'aws-lambda';
 import * as AWS from 'aws-sdk';
 import {DocumentClient} from "aws-sdk/lib/dynamodb/document_client";
 
-// AWS.config.update({ region: 'us-east-1' });
-const dynamoDB = new DocumentClient();
+AWS.config.update({ region: 'us-east-1' });
+const dynamoDB = new AWS.DynamoDB.DocumentClient();
 type NFTType = {
     name:string;
     desc:string;
     img:string;
 }
 
-export const saveToDynamoDB: APIGatewayProxyHandler = async (event) => {
+export const handler: APIGatewayProxyHandler = async (event) => {
     console.log(event)
     try {
         if(!event.body){
