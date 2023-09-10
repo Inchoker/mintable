@@ -12,10 +12,12 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.210.0",
-    "@types/aws-lambda": "^8.10.119"
+    "@types/aws-lambda": "^8.10.119",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@aws-sdk/lib-dynamodb": "^3.409.0",
+    "@types/uuid": "^9.0.3",
     "typescript": "^5.2.2"
   }
 }

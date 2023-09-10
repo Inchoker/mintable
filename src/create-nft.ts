@@ -1,11 +1,12 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { PutCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-
+import uuid from 'uuid';
 type NFTType = {
     name:string;
     desc:string;
     img:string;
+    uuid:string;
 }
 
 const client = new DynamoDBClient({} as any);
@@ -14,7 +15,6 @@ const docClient = DynamoDBDocumentClient.from(client);
 
 export const handler: APIGatewayProxyHandler = async (event) => {
     console.log(event)
-    console.log(docClient)
     try {
         if(!event.body){
             throw new Error('No body in request')
@@ -24,6 +24,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
             name:requestBody.name,
             desc: requestBody.desc,
             img:requestBody.img,
+            uuid: uuid.v4()
         }
 
         const command = new PutCommand({
