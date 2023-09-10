@@ -8,7 +8,6 @@ type NFTType = {
     desc:string;
     img:string;
     uuid:string;
-    partition: string
 }
 const client = new DynamoDBClient({} as any);
 const docClient = DynamoDBDocumentClient.from(client);
@@ -25,7 +24,6 @@ export const handler: APIGatewayProxyHandler = async (event) => {
             desc: requestBody.desc,
             img:requestBody.img,
             uuid: uuidv4(),
-            partition:"1"
         }
 
         const command = new PutCommand({
