@@ -1,7 +1,7 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { PutCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 type NFTType = {
     name:string;
     desc:string;
@@ -24,7 +24,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
             name:requestBody.name,
             desc: requestBody.desc,
             img:requestBody.img,
-            uuid: uuid.v4()
+            uuid: uuidv4()
         }
 
         const command = new PutCommand({
