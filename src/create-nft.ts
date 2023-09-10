@@ -14,6 +14,7 @@ const docClient = DynamoDBDocumentClient.from(client);
 
 export const handler: APIGatewayProxyHandler = async (event) => {
     console.log(event)
+    console.log(docClient)
     try {
         if(!event.body){
             throw new Error()
