@@ -16,9 +16,9 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     const requestBody = JSON.parse(event.body);
     const command = new QueryCommand({
         TableName: "nft",
-        KeyConditionExpression:"name = :name",
+        KeyConditionExpression:"name = :n",
         ExpressionAttributeValues:{
-            ":name": requestBody.name,
+            ":n": requestBody.name,
         }
     });
 
