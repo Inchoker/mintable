@@ -1,6 +1,6 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, GetCommand } from "@aws-sdk/lib-dynamodb";
+import {DynamoDBDocumentClient, QueryCommand} from "@aws-sdk/lib-dynamodb";
 
 const client = new DynamoDBClient({} as any);
 const docClient = DynamoDBDocumentClient.from(client);
@@ -14,10 +14,10 @@ export const handler: APIGatewayProxyHandler = async (event) => {
         }
     }
     const requestBody = JSON.parse(event.body);
-    const command = new GetCommand({
+    const command = new QueryCommand({
         TableName: "nft",
-        Key: {
-            uuid: requestBody.uuid,
+        ExpressionAttributeNames: {
+            name: requestBody.name,
         }
     });
 
