@@ -16,11 +16,12 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     const requestBody = JSON.parse(event.body);
     const command = new QueryCommand({
         TableName: "nft",
-        KeyConditionExpression:"#name = :n",
+        KeyConditionExpression:"partition_key_attr = :partition_val AND #name = :n",
         ExpressionAttributeNames: {
           "#name":"name"
         },
         ExpressionAttributeValues:{
+            ":partition_val":"somevalue",
             ":n": requestBody.name,
         }
     });
