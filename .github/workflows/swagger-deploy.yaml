@@ -3,7 +3,7 @@ name: Push to s3
 on:
   push:
     paths:
-      - src/swagger.json
+      - swagger.json
 
 jobs:
   push_to_s3:
