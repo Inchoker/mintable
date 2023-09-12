@@ -12,8 +12,17 @@
   "paths": {
     "/mintable": {
       "get": {
-        "description": "Get nft by name",
         "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "Bearer token"
+            },
+            "description": "An authorization token for accessing the API."
+          },
           {
             "name": "name",
             "in": "query",
@@ -25,6 +34,7 @@
             }
           }
         ],
+        "description": "Get nft by name",
         "responses": {
           "200": {
             "description": "OK",
@@ -41,6 +51,32 @@
         }
       },
       "post": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nft": {
+                  "type": "object"
+                }
+
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "Bearer token"
+            },
+            "description": "An authorization token for accessing the API."
+          }
+        ],
         "description": "Create nft",
         "requestBody": {
           "content": {
@@ -65,20 +101,7 @@
                   }
                 }
               }}}}
-            },"responses": {
-        "200": {
-          "description": "OK",
-          "schema": {
-            "type": "object",
-            "properties": {
-              "nft": {
-                "type": "object"
-              }
-
-            }
-          }
-        }
-      }
+            },
           }
   }
 }
