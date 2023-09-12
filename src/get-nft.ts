@@ -23,7 +23,6 @@ export const handler: APIGatewayProxyHandler = async (event) => {
             "#uuid": "uuid"
         },
         ExpressionAttributeValues:{
-            ":partition_val":"somevalue",
             ":n": requestBody.name,
             ":u":"somevalue"
         }
