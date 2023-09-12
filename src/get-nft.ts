@@ -1,6 +1,6 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import {DynamoDBDocumentClient, QueryCommand} from "@aws-sdk/lib-dynamodb";
+import {DynamoDBDocumentClient, QueryCommand, ScanCommand} from "@aws-sdk/lib-dynamodb";
 
 const client = new DynamoDBClient({} as any);
 const docClient = DynamoDBDocumentClient.from(client);
@@ -14,17 +14,14 @@ export const handler: APIGatewayProxyHandler = async (event) => {
         }
     }
     const query = event.queryStringParameters;
-    const command = new QueryCommand({
+    const command = new ScanCommand({
         TableName: "nft",
-        KeyConditionExpression: "#uuid = :u",
         FilterExpression:"#name = :n",
         ExpressionAttributeNames: {
           "#name":"name",
-            "#uuid": "uuid"
         },
         ExpressionAttributeValues:{
             ":n": query.name,
-            ":u":"somevalue"
         }
     });
 
