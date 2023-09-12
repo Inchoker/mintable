@@ -1,18 +1,41 @@
 {
-  "swagger": "3.0",
+  "openapi": "3.0.2",
   "info": {
     "title": "Mintable API",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://73q1g05wo2.execute-api.us-east-1.amazonaws.com"
+    }
+  ],
   "paths": {
-    "/hello": {
+    "/mintable": {
       "get": {
-        "description": "Get a hello message",
+        "description": "Get nft by name",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                }
+              }
+            },}},
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "object",
+              "properties": {
+                "nft": {
+                  "type": "object"
+                }
+
+              }
             }
           }
         }
