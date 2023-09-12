@@ -17,7 +17,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     const command = new QueryCommand({
         TableName: "nft",
         KeyConditionExpression: "#uuid = :u",
-        FilterExpression:"#name = :n AND #uuid= :u",
+        FilterExpression:"#name = :n",
         ExpressionAttributeNames: {
           "#name":"name",
             "#uuid": "uuid"
