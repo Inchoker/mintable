@@ -13,7 +13,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
             body: JSON.stringify({ nft: ""}),
         }
     }
-    const query = JSON.parse(event.queryStringParameters);
+    const query = event.queryStringParameters;
     const command = new QueryCommand({
         TableName: "nft",
         KeyConditionExpression: "#uuid = :u",
