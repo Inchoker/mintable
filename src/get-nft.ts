@@ -17,9 +17,10 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     const command = new QueryCommand({
         TableName: "nft",
         KeyConditionExpression:"partition_key_attr = :partition_val",
-        FilterExpression:"partition_key_attr = :partition_val AND #name = :n AND uuid= :u",
+        FilterExpression:"partition_key_attr = :partition_val AND #name = :n AND #uuid= :u",
         ExpressionAttributeNames: {
-          "#name":"name"
+          "#name":"name",
+            "#uuid": "uuid"
         },
         ExpressionAttributeValues:{
             ":partition_val":"somevalue",
