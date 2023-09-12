@@ -1,7 +1,7 @@
 {
-  "swagger": "2.0",
+  "swagger": "3.0",
   "info": {
-    "title": "My API",
+    "title": "Mintable API",
     "version": "1.0.0"
   },
   "paths": {
