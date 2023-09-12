@@ -65,7 +65,20 @@
                   }
                 }
               }}}}
+            },"responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "nft": {
+                "type": "object"
+              }
+
             }
+          }
+        }
+      }
           }
   }
 }
