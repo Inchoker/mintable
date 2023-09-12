@@ -13,18 +13,18 @@
     "/mintable": {
       "get": {
         "description": "Get nft by name",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                }
-              }
-            },}},
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "name of the nft",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "poo",
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",

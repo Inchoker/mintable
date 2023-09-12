@@ -7,7 +7,7 @@ const docClient = DynamoDBDocumentClient.from(client);
 
 export const handler: APIGatewayProxyHandler = async (event) => {
     console.log(event)
-    if(!event.body){
+    if(!event.queryStringParameters){
         return {
             statusCode: 200,
             body: JSON.stringify({ nft: ""}),
