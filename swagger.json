@@ -39,7 +39,33 @@
             }
           }
         }
-      }
-    }
+      },
+      "post": {
+        "description": "Create nft",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "default": {
+                  "name": "a",
+                  "desc": "b"
+                 ,
+                  "img": "c"
+                },
+                "property": {
+                  "name": {
+                    "type": "string",
+                  },
+                  "desc": {
+                    "type": "string",
+                  },
+                  "img": {
+                    "type": "string",
+                  }
+                }
+              }}}}
+            }
+          }
   }
 }
